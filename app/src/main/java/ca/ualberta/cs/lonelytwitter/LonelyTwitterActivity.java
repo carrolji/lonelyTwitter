@@ -56,8 +56,6 @@ public class LonelyTwitterActivity extends Activity {
 				tweetList.add(tweet);
 				tweetList.add(normalTweet);
 
-
-
 				saveInFile(text, new Date(System.currentTimeMillis()));
 				finish();
 
