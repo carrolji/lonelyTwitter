@@ -49,12 +49,14 @@ public abstract class Tweet implements Tweetable {
 
     public abstract Boolean isImportant();
 
+    @Override
+    public String toString(){
+        return date.toString() + " | " + message;
+    }
+
     public void addMood(CurrentMood currentMood){
         moodList.add(currentMood);
     }
 
-    //default don't need this
-    /*public Tweet(){
-        super();
-    }*/
+
 }
