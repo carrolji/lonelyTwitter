@@ -23,16 +23,44 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+
+/**
+ * The type Lonely twitter activity.
+ */
 public class LonelyTwitterActivity extends Activity {
+	/**
+	 * The file that all the tweets are saved there.
+	 * The format of the file is JSON.
+	 * @see #loadFromFile()
+	 * @see #saveInFile()
+	 */
 
 	private static final String FILENAME = "file.sav";
+	private enum TweetListOrdering {
+		/**
+		 * Date ascending tweet list ordering.
+		 */
+		DATE_ASCENDING, /**
+		 * Date descending tweet list ordering.
+		 */
+		DATE_DESCENDING, /**
+		 * Text ascending tweet list ordering.
+		 */
+		TEXT_ASCENDING,
+		/**
+		 * Text descending tweet list ordering.
+		 */
+		TEXT_DESCENDING}
 	private EditText bodyText;
 	private ListView oldTweetsList;
 
 	private ArrayList<Tweet> tweetList;
 	private ArrayAdapter<Tweet> adapter;
 
-	/** Called when the activity is first created. */
+	/**
+	 * Called when the activity is first created.
+	 * @param savedInstanceState
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,6 +87,7 @@ public class LonelyTwitterActivity extends Activity {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
 				//child class instance can be assign to parent class variable
+				text = trimExtraSpaces(text);
 				Tweet tweet = new NormalTweet(text);
 
 
@@ -84,6 +113,30 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	/**
+	 * Removes extra spaces in the given string
+	 * @param inputString input string
+	 * @return string without extra spaces
+     */
+	private String trimExtraSpaces(String inputString){
+		inputString = inputString.replaceAll("\\s+"," ");
+		return inputString;
+	}
+
+	/**
+	 * Ordering Tweet list
+	 * @param ordering
+     */
+	private void sortTweetListItems(TweetListOrdering ordering){
+		//TODO SOMETHING
+
+	}
+
+	/**
+	 * Loads tweets from file.
+	 * @throws TweetTooLongException if tweet is too long
+	 * @exception FileNotFoundException if the file is not created
+	 */
 	private void loadFromFile() {
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
@@ -102,6 +155,11 @@ public class LonelyTwitterActivity extends Activity {
 			throw new RuntimeException();
 		}
 	}
+
+	/**
+	 * Saves tweets in file in JSON format.
+	 * @throws FileNotFoundException if folder not exists
+	 */
 	
 	private void saveInFile() {
 		try {
