@@ -66,10 +66,11 @@ public class ElasticsearchTweetController {
             ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
 
             String query = "" +search_parameters[0]+ "";
+            System.out.println(query);
 
             // TODO Build the query
-            Search search = new Search.Builder(search_parameters[0])
-                    .addIndex("Testing")
+            Search search = new Search.Builder(query)
+                    .addIndex("testing")
                     .addType("tweet")
                     .build();
 
@@ -82,6 +83,7 @@ public class ElasticsearchTweetController {
                 }
                 else{
                     Log.i("Error","The search query failed to find any tweets that matched");
+                    System.out.println("could not find error");
                 }
             }
             catch (Exception e) {
