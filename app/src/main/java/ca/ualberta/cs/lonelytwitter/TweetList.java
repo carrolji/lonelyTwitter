@@ -26,4 +26,9 @@ public class TweetList {
     public void delete(NormalTweet tweet){
 
     }
+
+    public int getCount(){
+        int itemCount = tweets.size();
+        return itemCount;
+    }
 }
