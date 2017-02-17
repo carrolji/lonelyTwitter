@@ -10,6 +10,9 @@ public class TweetList {
     private ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
 
     public void add(NormalTweet tweet) {
+        if(tweets.contains(tweet)){
+            throw new IllegalArgumentException();
+        }
         tweets.add(tweet);
     }
 
@@ -24,7 +27,7 @@ public class TweetList {
     }
 
     public void delete(NormalTweet tweet){
-
+        tweets.remove(tweet);
     }
 
     public int getCount(){
