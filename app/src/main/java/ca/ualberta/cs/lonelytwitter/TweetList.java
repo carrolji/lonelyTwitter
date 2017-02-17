@@ -17,13 +17,22 @@ public class TweetList {
     }
 
     public boolean hasTweet(NormalTweet tweet){
-        return tweets.contains(tweet);
+        if (tweets.contains(tweet)) {
+            return true;
+        }
+        return false;
     }
 
     public NormalTweet getTweet(int index){
         //getTweet index and return Tweet
         //return new NormalTweet("not the tweet");
-        return tweets.get(0);
+        
+        Collections.sort(tweets, new Comparator<NormalTweet>() {
+            public int compare(NormalTweet tweet1, NormalTweet tweet2) {
+                return tweet1.getDate().compareTo(tweet2.getDate());
+            }
+        });
+        return tweets.get(index);
     }
 
     public void delete(NormalTweet tweet){
