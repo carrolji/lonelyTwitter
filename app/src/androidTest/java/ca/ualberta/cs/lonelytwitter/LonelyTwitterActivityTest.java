@@ -60,7 +60,7 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 
 
         solo.clickOnButton("Save");
         solo.waitForText("Test Tweet!");
-        
+
 
         final ListView oldTweetList = activity.getOldTweetList(); //create new method
         Tweet tweet = (Tweet) oldTweetList.getItemAtPosition(0);
@@ -71,7 +71,7 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 
         solo.clickInList(0);
 
         solo.assertCurrentActivity("Wrong Activity", EditTweetActivity.class);
-        assertTrue(solo.waitForText("TextView"));
+        assertTrue(solo.waitForText("Test Tweet!"));
 
         solo.goBack();
         solo.assertCurrentActivity("Wrong Activity", LonelyTwitterActivity.class);

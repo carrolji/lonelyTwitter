@@ -6,6 +6,9 @@ package ca.ualberta.cs.lonelytwitter;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import static ca.ualberta.cs.lonelytwitter.R.id.textView2;
 
 public class EditTweetActivity extends Activity {
 
@@ -13,5 +16,10 @@ public class EditTweetActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_tweet);
+        Bundle bundle = getIntent().getExtras();
+        String tweet = bundle.getString("passTweet");
+
+        TextView textTweet = (TextView) findViewById(textView2);
+        textTweet.setText(tweet);
     }
 }

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -91,8 +92,14 @@ public class LonelyTwitterActivity extends Activity {
 		});
 
 		oldTweetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 				Intent intent = new Intent(activity, EditTweetActivity.class);
+
+				NormalTweet tweet = (NormalTweet) oldTweetsList.getItemAtPosition(position);
+				String passTweet = tweet.getMessage();
+
+				intent.putExtra("passTweet", passTweet);
+
 				startActivity(intent);
 
 			}
