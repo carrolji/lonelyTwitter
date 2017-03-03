@@ -13,8 +13,10 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +36,7 @@ public class LonelyTwitterActivity extends Activity {
 	 * @see #loadFromFile()
 	 * @see #saveInFile()
 	 */
-
+	private LonelyTwitterActivity activity = this;
 	private static final String FILENAME = "file.sav";
 	private enum TweetListOrdering {
 		/**
@@ -57,6 +59,10 @@ public class LonelyTwitterActivity extends Activity {
 	private ArrayList<Tweet> tweetList;
 	private ArrayAdapter<Tweet> adapter;
 
+	public ListView getOldTweetList(){
+		return oldTweetsList;
+	}
+
 	/**
 	 * Called when the activity is first created.
 	 * @param savedInstanceState
@@ -71,14 +77,25 @@ public class LonelyTwitterActivity extends Activity {
 		Button clearButton = (Button) findViewById(R.id.clear);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
+
+
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v){
 				//bodyText.setText("");
 				tweetList.clear();
+				deleteFile("file sav");
 				adapter.notifyDataSetChanged();
-				saveInFile();
+				//saveInFile();
 			}
 
+		});
+
+		oldTweetsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+				Intent intent = new Intent(activity, EditTweetActivity.class);
+				startActivity(intent);
+
+			}
 		});
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
